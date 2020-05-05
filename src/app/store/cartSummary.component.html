@@ -1,0 +1,16 @@
+<div class="pull-xs-right">
+  <small>
+    Koszyk:
+    <span *ngIf="cart.itemCount > 0">
+      {{ cart.itemCount }} product(ów)
+      {{ cart.cartPrice  | currency }}
+    </span>
+     <span *ngIf="cart.itemCount == 0">
+      (pusty)
+     </span>
+  </small>
+  <button class="btn btn-sm bg-inverse"
+          [disabled]="cart.itemCount == 0">
+          <i class="fas fa-shopping-cart"></i>
+  </button>
+</div>
