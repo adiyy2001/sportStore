@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
     if (token !== null && token.startsWith("Bearer<")) {
       token = token.trim().substring(7, token.length);
       try {
-        jwt.verify(appsekret, APP_SECRET)
+        jwt.verify(token, APP_SECRET)
         next();
         return;
       } catch (err) {}
