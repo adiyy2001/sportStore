@@ -6,7 +6,7 @@ const PASSWORD = "sekret";
 
 module.exports = (req, res, next) => {
   if ( (req.url === "/login") && (req.method === "POST") ) {
-    if ( (req.body !== null) && (req.body.name === USERNAME) && (req.body.password == PASSWORD)) {
+    if ( (req.body !== null) && (req.body.name === USERNAME) && (req.body.password == PASSWORD) ) {
 
       let token = jwt.sign({ data: USERNAME, expiresIn: "1h" }, APP_SECRET);
       res.json({ success: true, token: token });
@@ -21,13 +21,12 @@ module.exports = (req, res, next) => {
 
     let token = req.headers["authorization"];
     if (token !== null && token.startsWith("Bearer<")) {
-      token = token.substring(7, token.length - 1);
-
+      token = token.trim().substring(7, token.length);
       try {
-        jwt.verify(token, APP_SECRET);
+        jwt.verify(appsekret, APP_SECRET)
         next();
         return;
-      } catch (err) { }
+      } catch (err) {}
     }
 
     res.statusCode = 401;
